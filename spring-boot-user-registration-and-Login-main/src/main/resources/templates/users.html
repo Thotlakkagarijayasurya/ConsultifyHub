@@ -1,0 +1,264 @@
+<!-- DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script>
+     	'use strict';
+     	let userRole = null;
+     	async function checkUserRole(){
+     		const userResponse = await fetch('/getuserrole');
+     		userRole = await userResponse.text();
+     		if(userRole==="ROLE_USER"){
+     			createticket.style.visibility = 'visible';
+     		}
+     	}
+		window.onload = checkUserRole;
+	</script> 
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Welcome</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/profile}">Profile</a>
+                </li>
+                <li class="nav-item">
+                	<a class="nav-link active" style="visibility: hidden" id="createticket" aria-current="page" th:href="@{/newticket}">Create Ticket</a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/mytickets}">Tickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <title>Consultify Solutions</title>
+     <script>
+     	'use strict';
+     	let userRole = null;
+     	async function checkUserRole(){
+     		const userResponse = await fetch('/getuserrole');
+     		userRole = await userResponse.text();
+     		if(userRole==="ROLE_USER"){
+     			createticket.style.visibility = 'visible';
+     		}
+     	}
+		window.onload = checkUserRole;
+	</script> 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    </style>
+    <style>
+        *,*::after,*::before{
+            box-sizing: border-box;
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+        html::-webkit-scrollbar{
+            display: none;
+            
+        }
+        section{
+            width: 100%;
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+        }
+        .navbar{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10%;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .page-logo img{
+            /* padding: 2rem; */
+            width: 20rem;
+        }
+        .nav-section{
+            
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            margin-right: 2rem;
+            align-items: center;
+
+        }
+        .nav-section li{
+            list-style: none;
+            cursor: pointer;
+            /* font-size: 2.5vh; */
+            font-size: 1.3rem;
+            
+        }
+        .nav-items a{
+            text-decoration: none;
+            color: black;
+        }
+        .nav-items a:hover{
+            color: rgb(0, 103, 247);
+        }
+
+        .profile-login{
+            width: 20%;
+            height: 60%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            
+        }
+        .profile-login button{
+            padding: 12rem;
+        }
+
+        #profile, #tickets, #logout, #createticket{
+             width: 100%; 
+            display: flex;
+            border-radius: 2px;
+            cursor: pointer;
+            background: rgb(231, 240, 255);
+            color: rgb(0, 103, 247);
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            padding: 12px;
+            transition: all 0.2s linear;
+            margin: 8px;
+            white-space: nowrap; 
+        }
+        #createticket:hover, #profile:hover, #tickets:hover, #logout:hover{
+            transform: scale(1.1);
+            color: white;
+            background-color: rgb(0, 103, 247);
+        }
+        .home-page{
+            width: 100%;
+            height: 70%;
+            /* margin: 3rem; */
+            display: flex;
+            justify-content: space-around;
+        }
+        .home-page .home-left{
+            /* width: 50%; */
+            font-family: Roboto;
+            /* padding-top: 6rem; */
+        }
+        .home-left .main-content{
+            /* font-size: 8vh; */
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .home-left .main-subtext{
+            /* width: 80%; */
+            font-size: 3vh;
+            font-size: 1.5rem;
+            text-align: center;
+            color: rgb(80, 80, 80);
+        }
+
+        /* .home-right{
+            width: 50%;
+        } */
+        .home-right img{
+            /* float: right; */
+            /* width: 80%; */
+            /* width: 450px; */
+            width: 40vw;
+            animation: floatImage 4s ease-in-out infinite;
+        }
+
+
+        @keyframes floatImage {
+            0%{
+                transform: translateY(0);
+            }
+            50%{
+                transform: translateY(-2.4rem);
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 1300px) {
+            .home-page{
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+            .home-right img{
+                margin-top: 2rem;
+                width: 70vw;
+            }            
+        }
+
+    </style>
+</head>
+<body>
+    <section class="home">
+        <nav class="navbar">
+            <span class="page-logo">
+                <img src="main-logo.png" alt="logo" style="float: left; margin-right: 600px;">
+            </span>
+            <!-- <ul class="nav-section">
+                <li class="nav-items"><a href="#about">About</a></li>
+                <li class="nav-items"><a href="#pricing">Pricing</a></li>
+                <li class="nav-items"><a href="#contact">Contact</a></li>
+                
+            </ul> -->
+            <span class="profile-login">
+            <button style="visibility: hidden" id="createticket" type="button"><a th:href="@{/newticket}"style="text-decoration: none;">New Ticket</a></button>
+                <button id="profile" type="button"><a th:href="@{/profile}" style="text-decoration: none;">Profile</a></button>
+                <button id="tickets" type="button"><a th:href="@{/mytickets}" style="text-decoration: none;">Tickets</a></button>
+                <button id="logout" class="active"><a type="button" th:href="@{/logout}" style="text-decoration: none;">Logout</a></button>
+            </span>
+        </nav>
+        <div class="home-page">
+            <div class="home-left">
+                <p class="main-content">
+                    Empowering your journey with <br>visionary guidance
+                </p>
+                <p class="main-subtext">Charting paths to success with clarity and foresight..</p>
+            </div>
+            <div class="home-right">
+                <img src="hero.png" alt="hero">
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <p>Lorem*2
+        </p>
+        
+    </section>
+    
+</body>
+</html>
